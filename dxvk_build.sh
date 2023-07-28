@@ -1,7 +1,8 @@
 #!/bin/bash
 
-DXVK_PATH=$PWD/source
+SOURCE_PATH=$PWD/source
 OUTPUT_PATH=$PWD/output
+BUILD_NAME=devel
 # update if you care about file timestamps
 TIMEZONE=Etc/UTC
 
@@ -17,7 +18,7 @@ then
                -e TZ="$TIMEZONE" \
                -e PROJECT_NAME="$1" \
                -e BUILD_NAME="$BUILD_NAME" \
-               -v $DXVK_PATH:/home/builder/source \
+               -v $SOURCE_PATH:/home/builder/source \
                -v $OUTPUT_PATH:/home/builder/output \
                archlinux/dxvk
 else
