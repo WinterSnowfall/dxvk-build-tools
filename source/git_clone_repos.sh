@@ -27,7 +27,7 @@ case $PROJECT in
         ;;
     *)
         rm -rf dxvk
-	    git clone --recurse-submodules https://github.com/doitsujin/dxvk --branch $BRANCH dxvk
+        git clone --recurse-submodules https://github.com/doitsujin/dxvk --branch $BRANCH dxvk
         ;;
 esac
 

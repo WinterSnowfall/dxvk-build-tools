@@ -2,15 +2,15 @@
 
 BASE_FOLDER="dxvk-tests"
 BUILD_DIR=$BASE_FOLDER"/build"
-crossfile=""
 
 DXVKTESTS_SRC_DIR=$(dirname $(readlink -f $0))"/$BASE_FOLDER"
 DXVKTESTS_BUILD_DIR=$(realpath "$BUILD_DIR")
 
-if [ -e "$DXVKTESTS_BUILD_DIR" ]; then
-  echo "Clearing existing build directory $DXVKTESTS_BUILD_DIR"
-  rm -rf "$DXVKTESTS_BUILD_DIR"
-fi
+# won't ever be a problem with docker builds
+#if [ -e "$DXVKTESTS_BUILD_DIR" ]; then
+#  echo "Clearing existing build directory $DXVKTESTS_BUILD_DIR"
+#  rm -rf "$DXVKTESTS_BUILD_DIR"
+#fi
 
 function build_arch {
   cd "$DXVKTESTS_SRC_DIR"
@@ -23,18 +23,24 @@ function build_arch {
               --libdir "x$1"                                    \
               "$DXVKTESTS_BUILD_DIR/build.$1"
 
-  echo "*" > "$DXVKTESTS_BUILD_DIR/../.gitignore"
-
   cd "$DXVKTESTS_BUILD_DIR/build.$1"
   ninja install
+
+  rm -rf "$DXVKTESTS_BUILD_DIR/build.$1"
 }
 
+echo "Building x86-32 tests..."
 build_arch 32
+echo ""
+echo "Building x86-64 tests..."
+build_arch 64
+echo ""
 
 if [ $? -eq 0 ]
 then
-	rm -rf /home/builder/output/$BASE_FOLDER
-    mv /home/builder/source/$BASE_FOLDER/build/x32 /home/builder/output/$BASE_FOLDER
-	rm -rf /home/builder/source/$BASE_FOLDER/build
+    rm -rf /home/builder/output/$BASE_FOLDER
+    mv /home/builder/source/$BASE_FOLDER/build /home/builder/output/$BASE_FOLDER    
 fi
+
+rm -rf /home/builder/source/$BASE_FOLDER/build
 

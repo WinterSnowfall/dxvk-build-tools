@@ -1,7 +1,7 @@
 FROM archlinux:latest
 
 RUN pacman -Syu --noconfirm && pacman -S --noconfirm \
-	mingw-w64-gcc \
+    mingw-w64-gcc \
     meson \
     glslang \
     && useradd -m builder
