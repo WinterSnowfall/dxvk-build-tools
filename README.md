@@ -12,7 +12,7 @@ And also git, in case that wasn't already painfully obvious.
 
 * After installing docker you'll need to add your user to the docker group.  
   
-    `usermod -aG docker <your_username>`  
+    `sudo usermod -aG docker <your_username>`  
   
     Will do the trick, afterwards you'll need a restart of the docker demon (or your system).  
 
@@ -40,9 +40,9 @@ And also git, in case that wasn't already painfully obvious.
   
     Run the above whenever you need to build/rebuild dxvk/d8vk/dxvk-tests. Note that the scripts will delete the previously compiled binaries if you use the same parameters. Back up any folders in the `output` directory if you want to keep older versions around.  
 
-## What about dxvk-native, man?
+## What about dxvk-native?
 
-That's not covered here, sorry. My aim is to provide an easy way to build Wine/Proton/Windows ready dlls for quick testing and development work.
+That's not covered here, sorry. My aim is to provide an easy way to build Wine/Proton/Windows ready dlls for quick testing and development work. That being said it should be pretty easy to create a dxvk-native docker builder image retrofitting the existing scripts.
 
 ## I don't like your scripts at all, they're so bad it makes me sick. What should I do?
 
