@@ -16,7 +16,7 @@ And also git, in case that wasn't already painfully obvious.
   
     Will do the trick, afterwards you'll need a restart of the docker demon (or your system).  
 
-* Secondly, you need to make sure all the .sh scripts have their execute permissions set, otherwise nothing will work.  
+* Secondly, you need to make sure all the .sh scripts have their execute permissions set, otherwise nothing will work. Note that execute permissions also need to be added to the script that are in the `source` folder.  
 
 * Now you're set to fetch the latest Arch docker image and construct your build containers. To do that simply run:  
   
@@ -33,8 +33,8 @@ And also git, in case that wasn't already painfully obvious.
 
 * OK, now you **are** ready to launch your build containers. Use:  
   
-    `./dxvk_build.sh <project_name> [<build_name>]`  
-    `./dxvk-tests_build.sh`  
+    `./dxvk_build_runner.sh <project_name> [<build_name>]`  
+    `./dxvk-tests_build_runner.sh`  
   
     Where `<project_name>` can be either dxvk or d8vk (or really whatever name your source directory has). You can optionally also specify a `<build_name>`, otherwise it will default to `devel`.  
   
