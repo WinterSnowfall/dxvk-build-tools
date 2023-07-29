@@ -1,9 +1,12 @@
 FROM archlinux:latest
 
-RUN pacman -Syu --noconfirm && pacman -S --noconfirm \
+RUN echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf \
+    && pacman -Syu --noconfirm && pacman -S --noconfirm \
     mingw-w64-gcc \
     meson \
     glslang \
+    wine \
+    git \
     && useradd -m builder
 
 USER builder

@@ -13,8 +13,8 @@ USER builder
 
 WORKDIR /home/builder/source
 
-ENV PROJECT_NAME=dxvk
+ENV PROJECT_NAME=vkd3d-proton
 ENV BUILD_NAME=devel
-    
-CMD ["bash", "-c", "/home/builder/source/dxvk_build.sh $PROJECT_NAME $BUILD_NAME"]
+
+CMD ["bash", "-c", "/home/builder/source/vkd3d-proton_build.sh $PROJECT_NAME $BUILD_NAME"]
 

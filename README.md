@@ -1,6 +1,6 @@
 ﻿# dxvk-build-tools
 
-A collection of scripts and tools for constructing a docker image to build dxvk/d8vk/dxvk-tests. Are you on Debian & derivatives or some other obscure distro and are tired of shuffling MinGW versions? Forget about your worries and build your dxvk/d8vk/dxvk-tests using Arch based docker containers (much like the dxvk GitHub CI is doing).
+A collection of scripts and tools for constructing a docker image to build dxvk/d8vk/dxvk-tests/vkd3d-proton. Are you on Debian & derivatives or some other obscure distro and are tired of shuffling MinGW versions? Forget about your worries and build your dxvk/d8vk/dxvk-tests using Arch based docker containers (much like the dxvk GitHub CI is doing).
 
 ## What do I need?
 
@@ -20,12 +20,13 @@ And also git, in case that wasn't already painfully obvious.
 
 * Now you're set to fetch the latest Arch docker image and construct your build containers. To do that simply run:  
   
-    `./docker_dxvk_build`  
+    `./docker_dxvk_build.sh`  
+    `./docker_vkd3d-proton_build.sh`  
     `./docker_dxvk-tests_build.sh`  
   
     You may skip the latter if you're not interested in building dxvk-tests.  
 
-* You're now ready to launch the build images and enjoy your builds! Or are you? Well, no, you're not. Before that you'll need to use git to clone the repos locally. Each repo (be it dxvk, d8vk or dxvk-tests) needs its own folder inside of the `source` directory. Simply use:  
+* You're now ready to launch the build images and enjoy your builds! Or are you? Well, no, you're not. Before that you'll need to use git to clone the repos locally. Each repo (be it dxvk, d8vk, dxvk-tests or vkd3d-proton) needs its own folder inside of the `source` directory. Simply use:  
   
     `cd source; ./git_clone_repos.sh; cd ..`  
   
@@ -34,11 +35,12 @@ And also git, in case that wasn't already painfully obvious.
 * OK, now you **are** ready to launch your build containers. Use:  
   
     `./dxvk_build_runner.sh <project_name> [<build_name>]`  
+    `./vkd3d-proton_build_runner.sh [<build_name>]`  
     `./dxvk-tests_build_runner.sh`  
   
     Where `<project_name>` can be either dxvk or d8vk (or really whatever name your source directory has). You can optionally also specify a `<build_name>`, otherwise it will default to `devel`.  
   
-    Run the above whenever you need to build/rebuild dxvk/d8vk/dxvk-tests. Note that the scripts will delete the previously compiled binaries if you use the same parameters. Back up any folders in the `output` directory if you want to keep older versions around.  
+    Run the above whenever you need to build/rebuild dxvk/d8vk/dxvk-tests/vkd3d-proton. Note that the scripts will delete the previously compiled binaries if you use the same parameters. Back up any folders in the `output` directory if you want to keep older versions around.  
 
 ## What about dxvk-native?
 

@@ -7,6 +7,7 @@ echo "#                                      #"
 echo "#  (1)   dxvk                          #"
 echo "#  (2)   d8vk                          #"
 echo "#  (3)   dxvk-tests                    #"
+echo "#  (4)   vkd3d-proton                  #"
 echo "#                                      #"
 echo "########################################"
 echo ""
@@ -24,6 +25,10 @@ case $PROJECT in
     3)
         rm -rf dxvk-tests
         git clone --recurse-submodules https://github.com/doitsujin/dxvk-tests --branch $BRANCH dxvk-tests
+        ;;
+    4)
+        rm -rf vkd3d-proton
+        git clone --recurse-submodules https://github.com/HansKristian-Work/vkd3d-proton --branch $BRANCH vkd3d-proton
         ;;
     *)
         rm -rf dxvk
