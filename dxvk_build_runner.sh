@@ -8,10 +8,18 @@ TIMEZONE=Etc/UTC
 
 if [ $# -ge 1 ]
 then
+
     if [ $# -ge 2 ]
     then
         BUILD_NAME=$2
     fi
+
+    if [ $DXVK_MAX_PERFORMANCE -eq 1 ]
+    then
+        sed sed -i 's/^'\''-msse3'\''$'/'\''-march=native'\''/g' $SOURCE_PATH/$1/meson.build
+        sed sed -i 's/^'\''-msse*'\''//g' $SOURCE_PATH/$1/meson.build
+    fi
+
     docker run -ti --rm \
                --name dxvk-builder \
                -h dxvk-builder  \

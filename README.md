@@ -42,6 +42,16 @@ And also git, in case that wasn't already painfully obvious.
   
     Run the above whenever you need to build/rebuild dxvk/d8vk/dxvk-tests/vkd3d-proton. Note that the scripts will delete the previously compiled binaries if you use the same parameters. Back up any folders in the `output` directory if you want to keep older versions around.  
 
+## An undocumented DXVK_MAX_PERFORMANCE shell variable??? I knew it, the conspiracy theories are real!
+
+It only exists within the confines of these unholy build scripts, I'm afraid. There's no free performance lunch to be had.
+
+If you set `DXVK_MAX_PERFORMANCE=1`™ before launching any of the runner scripts above, it will ensure d8vk/dxvk/dxvk-tests/vkd3d-proton are built using '-march=native'. **This compiler flag is for meme and testing purposes only** and will maybe at best give you a microgram of extra performance with dxvk in some cases, assuming you have an AVX capable processor. More details here, straight from the horse's mouth': https://github.com/doitsujin/dxvk/pull/3591#issuecomment-1656720927. There's really no reason to bother with this unless you want to do comparative performance testing and see for yourself that it doesn't do much, since it will make your builds less portable.
+
+Also note that once you've used it there's no going back to defaults unless you `git reset` affected repos or undo the changes manually.
+
+Consider yourself warned.
+
 ## What about dxvk-native?
 
 That's not covered here, sorry. My aim is to provide an easy way to build Wine/Proton/Windows ready dlls for quick testing and development work. That being said it should be pretty easy to create a dxvk-native docker builder image retrofitting the existing scripts.
