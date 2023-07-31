@@ -14,10 +14,13 @@ then
         BUILD_NAME=$2
     fi
 
-    if [ $DXVK_MAX_PERFORMANCE -eq 1 ]
+    if [ -n "$DXVK_MAX_PERFORMANCE" ]
     then
-        sed sed -i 's/^'\''-msse3'\''$'/'\''-march=native'\''/g' $SOURCE_PATH/$1/meson.build
-        sed sed -i 's/^'\''-msse*'\''//g' $SOURCE_PATH/$1/meson.build
+        if [ $DXVK_MAX_PERFORMANCE -eq 1 ]
+        then
+            sed -i "s/'-msse3',$/'-march=native',/g" $SOURCE_PATH/$1/meson.build
+            sed -i "/'-msse.*',$/d" $SOURCE_PATH/$1/meson.build
+        fi
     fi
 
     docker run -ti --rm \

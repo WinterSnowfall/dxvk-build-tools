@@ -8,14 +8,17 @@ TIMEZONE=Etc/UTC
 
 if [ $# -ge 1 ]
 then
-    BUILD_NAME=$2
+    BUILD_NAME=$1
 fi
 
-if [ $DXVK_MAX_PERFORMANCE -eq 1 ]
+if [ -n "$DXVK_MAX_PERFORMANCE" ]
 then
-    sed -i "s/\['-msse', '-msse2'\]$/\['-march=native'\]/g" $SOURCE_PATH/vkd3d-proton/build-win32.txt
-    sed -i "/\['-march=native'\]/d" $SOURCE_PATH/vkd3d-proton/build-win64.txt
-    sed -i "s/\[properties\]$/\[properties\]\nc_args=\['-march=native'\]\ncpp_args=\['-march=native'\]/g" $SOURCE_PATH/vkd3d-proton/build-win64.txt
+    if [ $DXVK_MAX_PERFORMANCE -eq 1 ]
+    then
+        sed -i "s/\['-msse', '-msse2'\]$/\['-march=native'\]/g" $SOURCE_PATH/vkd3d-proton/build-win32.txt
+        sed -i "/\['-march=native'\]/d" $SOURCE_PATH/vkd3d-proton/build-win64.txt
+        sed -i "s/\[properties\]$/\[properties\]\nc_args=\['-march=native'\]\ncpp_args=\['-march=native'\]/g" $SOURCE_PATH/vkd3d-proton/build-win64.txt
+    fi
 fi
 
 docker run -ti --rm \
