@@ -14,15 +14,6 @@ then
         BUILD_NAME=$2
     fi
 
-    if [ -n "$DXVK_MAX_PERFORMANCE" ]
-    then
-        if [ $DXVK_MAX_PERFORMANCE -eq 1 ]
-        then
-            sed -i "s/'-msse3',$/'-march=native',/g" $SOURCE_PATH/$1/meson.build
-            sed -i "/'-msse.*',$/d" $SOURCE_PATH/$1/meson.build
-        fi
-    fi
-
     docker run -ti --rm \
                --name dxvk-builder \
                -h dxvk-builder  \
@@ -31,7 +22,7 @@ then
                -e BUILD_NAME="$BUILD_NAME" \
                -v $SOURCE_PATH:/home/builder/source \
                -v $OUTPUT_PATH:/home/builder/output \
-               archlinux/dxvk
+               archlinux/repo-builder
 else
     echo "Please specify the project name!"
 fi
