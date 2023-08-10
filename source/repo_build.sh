@@ -47,5 +47,6 @@ then
     cd ..
 else
     echo "Please specify the repository name!"
+    exit 2
 fi
 

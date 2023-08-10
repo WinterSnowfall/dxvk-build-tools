@@ -24,6 +24,7 @@ then
                -v $OUTPUT_PATH:/home/builder/output \
                archlinux/repo-builder
 else
-    echo "Please specify the project name!"
+    echo "Please specify the repository name!"
+    exit 1
 fi
 
