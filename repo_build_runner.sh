@@ -18,7 +18,7 @@ then
                --name dxvk-builder \
                -h dxvk-builder  \
                -e TZ="$TIMEZONE" \
-               -e PROJECT_NAME="$1" \
+               -e REPO_NAME="$1" \
                -e BUILD_NAME="$BUILD_NAME" \
                -v $SOURCE_PATH:/home/builder/source \
                -v $OUTPUT_PATH:/home/builder/output \

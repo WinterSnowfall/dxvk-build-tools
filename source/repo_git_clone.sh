@@ -12,13 +12,13 @@ echo "#  (5)   vkd3d-proton                  #"
 echo "#                                      #"
 echo "########################################"
 echo ""
-read -p ">>> Pick an option and press ENTER: " PROJECT
+read -p ">>> Pick an option and press ENTER: " REPO_NAME
 
 echo ""
 read -p ">>> What branch will it be?: " BRANCH
 echo ""
 
-case $PROJECT in
+case $REPO_NAME in
     2)
         rm -rf dxvk-nvapi
         git clone --recurse-submodules https://github.com/jp7677/dxvk-nvapi --branch $BRANCH dxvk-nvapi

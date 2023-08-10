@@ -13,8 +13,8 @@ USER builder
 
 WORKDIR /home/builder/source
 
-ENV PROJECT_NAME=dxvk
+ENV REPO_NAME=dxvk
 ENV BUILD_NAME=devel
     
-CMD ["bash", "-c", "/home/builder/source/repo_build.sh $PROJECT_NAME $BUILD_NAME"]
+CMD ["bash", "-c", "/home/builder/source/repo_build.sh $REPO_NAME $BUILD_NAME"]
 
