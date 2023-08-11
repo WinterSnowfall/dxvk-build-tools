@@ -17,7 +17,7 @@ then
 
     docker run -ti --rm \
                --name dxvk-builder \
-               -h dxvk-builder  \
+               -h dxvk-builder \
                -e TZ="$TIMEZONE" \
                -e REPO_NAME=$REPO_NAME \
                -e BUILD_NAME=$BUILD_NAME \

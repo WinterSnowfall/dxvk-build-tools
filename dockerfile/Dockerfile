@@ -6,8 +6,9 @@ RUN echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.co
     meson \
     glslang \
     wine \
-    git \
-    && useradd -m builder
+    git
+RUN useradd -m builder \
+    && chmod 777 /home/builder
 
 USER builder
 
