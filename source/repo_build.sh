@@ -9,6 +9,9 @@ then
         "dxvk"|"d8vk")
             BUILD_BASE_PATH="dxvk"
             ;;
+        "dxvk-ags")
+            BUILD_BASE_PATH="dxvk-ags"
+            ;;
         "dxvk-nvapi")
             BUILD_BASE_PATH="dxvk-nvapi"
             ;;
@@ -29,7 +32,10 @@ then
 
     if [ $? -eq 0 ]
     then
-        if [ $REPO_NAME == "dxvk-nvapi" ]
+        if [ $REPO_NAME == "dxvk-ags" ]
+        then
+            rm -f /home/builder/$BUILD_BASE_PATH-$BUILD_NAME/x64/amd_ags_x64.dll.a
+        elif [ $REPO_NAME == "dxvk-nvapi" ]
         then
             rm -f /home/builder/$BUILD_BASE_PATH-$BUILD_NAME/LICENSE
             rm -f /home/builder/$BUILD_BASE_PATH-$BUILD_NAME/README.md

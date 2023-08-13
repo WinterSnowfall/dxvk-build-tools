@@ -1,6 +1,6 @@
 ﻿# dxvk-build-tools
 
-A collection of scripts and tools for constructing a docker image to build dxvk/d8vk/dxvk-nvapi/dxvk-tests/vkd3d-proton. Are you on Debian & derivatives or some other obscure distro and are tired of shuffling MinGW versions? Forget about your worries and build your dxvk/d8vk/dxvk-nvapi/dxvk-tests/vkd3d-proton using an Arch based docker container (much like the dxvk GitHub CI is doing).
+A collection of scripts and tools for constructing a docker image to build dxvk, dxvk-ags, dxvk-nvapi, d8vk, dxvk-tests and vkd3d-proton. Are you on Debian & derivatives or some other obscure distro and are tired of shuffling MinGW versions? Forget about your worries and build dxvk, dxvk-ags, dxvk-nvapi, d8vk, dxvk-tests and vkd3d-proton using an Arch based docker container (much like the dxvk GitHub CI is doing).
 
 ## What do I need?
 
@@ -32,9 +32,9 @@ And also git, in case that wasn't already painfully obvious.
   
     `./repo_build_runner.sh <repo_name> [<build_name>]`  
   
-    Where `<repo_name>` can be either dxvk, d8vk, dxvk-nvapi, dxvk-tests or vkd3d-proton. You can optionally also specify a `<build_name>`, otherwise it will default to `devel`.  
+    Where `<repo_name>` can be either dxvk, dxvk-ags, dxvk-nvapi, d8vk, dxvk-tests or vkd3d-proton. You can optionally also specify a `<build_name>`, otherwise it will default to `devel`.  
   
-    Run the above whenever you need to build/rebuild dxvk/d8vk/dxvk-nvapi/dxvk-tests/vkd3d-proton. Note that the scripts will delete the previously compiled binaries if you use the same parameters. Back up any folders in the `output` directory if you want to keep older versions around.  
+    Run the above whenever you need to build/rebuild dxvk, dxvk-ags, dxvk-nvapi, d8vk, dxvk-tests or vkd3d-proton. Note that the scripts will delete the previously compiled binaries if you use the same parameters. Back up any folders in the `output` directory if you want to keep older versions around.  
 
 ## What about dxvk-native?
 
