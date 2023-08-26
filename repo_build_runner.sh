@@ -23,7 +23,7 @@ then
                -e BUILD_NAME=$BUILD_NAME \
                -v $SOURCE_PATH:/home/builder/source \
                -v $OUTPUT_PATH:/home/builder/output \
-               archlinux/dxvk-builder
+               dxvk-builder
 else
     echo "Please specify the repository name!"
     exit 1
