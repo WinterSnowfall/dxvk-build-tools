@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker system prune -f
+docker rmi archlinux/dxvk-builder > /dev/null 2>&1
 docker pull archlinux:latest
 
 cd dockerfile
