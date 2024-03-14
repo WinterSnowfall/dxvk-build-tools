@@ -1,6 +1,6 @@
 FROM archlinux:latest
 
-RUN echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf \
+RUN echo -e "\n\n[multilib]\nInclude = /etc/pacman.d/mirrorlist\n" >> /etc/pacman.conf \
     && pacman -Syu --noconfirm && pacman -S --noconfirm \
     mingw-w64-gcc \
     meson \
@@ -14,8 +14,8 @@ USER builder
 
 WORKDIR /home/builder/source
 
-ENV REPO_NAME=dxvk
-ENV BUILD_NAME=devel
+ENV REPO_NAME="dxvk"
+ENV BUILD_NAME="devel"
     
-CMD ["bash", "-c", "/home/builder/source/repo_build.sh $REPO_NAME $BUILD_NAME"]
+CMD ["bash", "-c", "/home/builder/source/repo_build.sh \"$REPO_NAME\" \"$BUILD_NAME\""]
 

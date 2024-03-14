@@ -1,10 +1,10 @@
 #!/bin/bash
 
-SOURCE_PATH=$PWD/source
-OUTPUT_PATH=$PWD/output
-BUILD_NAME=devel
+SOURCE_PATH="$PWD/source"
+OUTPUT_PATH="$PWD/output"
+BUILD_NAME="devel"
 # update if you care about file timestamps
-TIMEZONE=Etc/UTC
+TIMEZONE="Etc/UTC"
 
 if [ $# -ge 1 ]
 then
@@ -19,10 +19,10 @@ then
                --name dxvk-builder \
                -h dxvk-builder \
                -e TZ="$TIMEZONE" \
-               -e REPO_NAME=$REPO_NAME \
-               -e BUILD_NAME=$BUILD_NAME \
-               -v $SOURCE_PATH:/home/builder/source \
-               -v $OUTPUT_PATH:/home/builder/output \
+               -e REPO_NAME="$REPO_NAME" \
+               -e BUILD_NAME="$BUILD_NAME" \
+               -v "$SOURCE_PATH":/home/builder/source \
+               -v "$OUTPUT_PATH":/home/builder/output \
                dxvk-builder
 else
     echo "Please specify the repository name!"
