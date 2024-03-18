@@ -10,6 +10,7 @@ echo "#  (3)   dxvk-nvapi                    #"
 echo "#  (4)   d8vk                          #"
 echo "#  (5)   dxvk-tests                    #"
 echo "#  (6)   vkd3d-proton                  #"
+echo "#  (7)   nvidia-libs                   #"
 echo "#                                      #"
 echo "########################################"
 echo ""
@@ -43,6 +44,10 @@ case "$REPO_NAME" in
     6)
         rm -rf vkd3d-proton
         git clone --recurse-submodules https://github.com/HansKristian-Work/vkd3d-proton --branch "$BRANCH" vkd3d-proton
+        ;;
+    7)
+        rm -rf nvidia-libs
+        git clone --recurse-submodules https://github.com/SveSop/nvidia-libs --branch "$BRANCH" nvidia-libs
         ;;
     *)
         rm -rf dxvk

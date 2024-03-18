@@ -21,6 +21,9 @@ then
         "vkd3d-proton")
             BUILD_BASE_PATH="vkd3d-proton"
             ;;
+        "nvidia-libs")
+            BUILD_BASE_PATH="nvidia-libs"
+            ;;
         *)
             echo "Invalid repository name selection."
             exit 1
@@ -42,6 +45,18 @@ then
         elif [ "$REPO_NAME" == "vkd3d-proton" ]
         then
             rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/setup_vkd3d_proton.sh"
+        elif [ "$REPO_NAME" == "nvidia-libs" ]
+        then
+            mv "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/lib/wine/i386-windows" "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/x32"
+            mv "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/lib64/wine/x86_64-windows" "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/x64"
+            rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/bin"
+            rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/lib"
+            rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/lib64"
+            rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/nvml_setup.sh"
+            rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/proton_setup.sh"
+            rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/Readme_nvml.txt"
+            rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/setup_nvlibs.sh"
+            rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/version"
         fi
 
         rm -rf "/home/builder/output/$REPO_NAME-$BUILD_NAME"
