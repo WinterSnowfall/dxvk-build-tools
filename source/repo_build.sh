@@ -49,6 +49,9 @@ then
         then
             mv "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/lib/wine/i386-windows" "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/x32"
             mv "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/lib64/wine/x86_64-windows" "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/x64"
+            mv -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/lib/wine/i386-unix/nvcuda.dll.so" "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/x32/nvcuda.dll"
+            mv -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/lib64/wine/x86_64-unix/nvcuda.dll.so" "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/x64/nvcuda.dll"
+            mv -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/lib64/wine/x86_64-unix/nvoptix.dll.so" "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/x64/nvoptix.dll"
             rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/bin"
             rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/lib"
             rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/lib64"
