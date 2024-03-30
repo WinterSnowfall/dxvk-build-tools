@@ -16,42 +16,38 @@ echo "########################################"
 echo ""
 read -p ">>> Pick an option and press ENTER: " REPO_NAME
 
-echo ""
-read -p ">>> What branch will it be?: " BRANCH
-echo ""
-
 case "$REPO_NAME" in
     2)
         rm -rf dxvk-ags
-        git clone --recurse-submodules https://github.com/doitsujin/dxvk-ags --branch "$BRANCH" dxvk-ags
+        git clone --recurse-submodules https://github.com/doitsujin/dxvk-ags dxvk-ags
         echo -e "/package-release.sh\n/.gitignore" >> dxvk-ags/.gitignore
         cp ../misc/package-release_dxvk-ags.sh dxvk-ags/package-release.sh
         ;;
     3)
         rm -rf dxvk-nvapi
-        git clone --recurse-submodules https://github.com/jp7677/dxvk-nvapi --branch "$BRANCH" dxvk-nvapi
+        git clone --recurse-submodules https://github.com/jp7677/dxvk-nvapi dxvk-nvapi
         ;;
     4)
         rm -rf d8vk
-        git clone --recurse-submodules https://github.com/AlpyneDreams/d8vk --branch "$BRANCH" d8vk
+        git clone --recurse-submodules https://github.com/AlpyneDreams/d8vk d8vk
         ;;
     5)
         rm -rf dxvk-tests
-        git clone --recurse-submodules https://github.com/doitsujin/dxvk-tests --branch "$BRANCH" dxvk-tests
+        git clone --recurse-submodules https://github.com/doitsujin/dxvk-tests dxvk-tests
         echo -e "/package-release.sh\n/.gitignore" >> dxvk-tests/.gitignore
         cp ../misc/package-release_dxvk-tests.sh dxvk-tests/package-release.sh
         ;;
     6)
         rm -rf vkd3d-proton
-        git clone --recurse-submodules https://github.com/HansKristian-Work/vkd3d-proton --branch "$BRANCH" vkd3d-proton
+        git clone --recurse-submodules https://github.com/HansKristian-Work/vkd3d-proton vkd3d-proton
         ;;
     7)
         rm -rf nvidia-libs
-        git clone --recurse-submodules https://github.com/SveSop/nvidia-libs --branch "$BRANCH" nvidia-libs
+        git clone --recurse-submodules https://github.com/SveSop/nvidia-libs nvidia-libs
         ;;
     *)
         rm -rf dxvk
-        git clone --recurse-submodules https://github.com/doitsujin/dxvk --branch "$BRANCH" dxvk
+        git clone --recurse-submodules https://github.com/doitsujin/dxvk dxvk
         ;;
 esac
 
