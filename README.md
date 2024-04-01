@@ -22,13 +22,7 @@ And also git, in case that wasn't already painfully obvious.
   
     `./docker_build.sh`
 
-* You're now ready to launch the build images and enjoy your builds! Or are you? Well, no, you're not. Before that you'll need to use git to clone the repos locally. Each repo (be it dxvk, d8vk, dxvk-nvapi, dxvk-tests, vkd3d-proton or nvidia-libs) needs its own folder inside of the `source` directory. Simply use:
-  
-    `cd source; ./repo_git_clone.sh; cd ..`
-  
-    And follow the prompts. If you don't know what's being asked of you, you probably shouldn't be using this build toolset in the first place. Rinse and repeat if you want to fetch multiple repos.
-
-* OK, now you **are** ready to launch your build containers. Use:
+* Finally, you're now ready to launch the build container and enjoy your builds! Use:
   
     `./repo_build_runner.sh <repo_name> [<build_name>]`
   

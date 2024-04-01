@@ -2,6 +2,7 @@
 
 SOURCE_PATH="$PWD/source"
 OUTPUT_PATH="$PWD/output"
+MISC_PATH="$PWD/misc"
 BUILD_NAME="devel"
 # update if you care about file timestamps
 TIMEZONE="Etc/UTC"
@@ -23,6 +24,7 @@ then
                -e BUILD_NAME="$BUILD_NAME" \
                -v "$SOURCE_PATH":/home/builder/source \
                -v "$OUTPUT_PATH":/home/builder/output \
+               -v "$MISC_PATH":/home/builder/misc \
                dxvk-builder
 else
     echo "Please specify the repository name!"
