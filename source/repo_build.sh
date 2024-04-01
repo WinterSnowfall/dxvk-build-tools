@@ -45,7 +45,7 @@ then
 
     if $GIT_CLONE
     then
-        git clone --depth 1 --recurse-submodules $REPO_URL $REPO_NAME
+        git clone --depth 1 --recurse-submodules "$REPO_URL" "$REPO_NAME"
 
         if [ "$REPO_NAME" == "dxvk-ags" ]
         then
