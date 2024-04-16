@@ -6,10 +6,15 @@ RUN dpkg --add-architecture i386 \
     && apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     mingw-w64 \
-    python3-pip \
+    glslang-tools \
     wine-stable \
-    git
-RUN pip3 install meson ninja
+    git \
+    python3 \
+    python3-pip \
+    && pip3 install meson ninja \
+    # cleanup post meson/ninja install to reduce final image size
+    && apt-get remove -y python3-pip \
+    && apt-get autoremove -y
 RUN useradd -m builder \
     && chmod 777 /home/builder
 
