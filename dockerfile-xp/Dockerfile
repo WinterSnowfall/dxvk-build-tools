@@ -17,7 +17,7 @@ USER builder
 
 WORKDIR /home/builder/source
 
-ENV REPO_NAME="dxvk"
+ENV REPO_NAME="dxvk-tests"
 ENV BUILD_NAME="devel"
     
 CMD ["bash", "-c", "/home/builder/source/repo_build.sh \"$REPO_NAME\" \"$BUILD_NAME\""]
