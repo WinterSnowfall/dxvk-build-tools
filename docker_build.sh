@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker rmi dxvk-builder:latest > /dev/null 2>&1
+docker rmi dxvk-builder:latest 2>/dev/null
 docker pull archlinux:latest
 
 cd dockerfile

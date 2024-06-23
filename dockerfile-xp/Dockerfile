@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM debian:bullseye
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -7,7 +7,7 @@ RUN dpkg --add-architecture i386 \
     gcc \
     mingw-w64 \
     glslang-tools \
-    wine-stable \
+    wine \
     git \
     python3 \
     python3-pip \

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-docker rmi dxvk-builder:xp > /dev/null 2>&1
-docker pull ubuntu:20.04
+docker rmi dxvk-builder:xp 2>/dev/null
+docker pull debian:bullseye
 
 cd dockerfile-xp
 docker build -t dxvk-builder:xp .
