@@ -50,11 +50,11 @@ lib_d3d9    = cpp.find_library('d3d9')
 #lib_d3d12   = cpp.find_library('d3d12')
 #lib_dxgi    = cpp.find_library('dxgi')
 
-if dxvk_is_msvc
-  lib_d3dcompiler_47 = cpp.find_library('d3dcompiler')
-else
-  lib_d3dcompiler_47 = cpp.find_library('d3dcompiler_47')
-endif
+#if dxvk_is_msvc
+#  lib_d3dcompiler_47 = cpp.find_library('d3dcompiler')
+#else
+#  lib_d3dcompiler_47 = cpp.find_library('d3dcompiler_47')
+#endif
 
 add_project_arguments(cpp.get_supported_arguments(compiler_args), language: 'cpp')
 add_project_link_arguments(cpp.get_supported_link_arguments(link_args), language: 'cpp')
@@ -67,5 +67,6 @@ if cpu_family == 'x86' and cpp.has_header('d3d8.h', include_directories: include
   subdir('d3d8')
 endif
 subdir('d3d9')
+#subdir('d3d9ex')
 #subdir('d3d11')
 #subdir('shader')
