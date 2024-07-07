@@ -13,10 +13,6 @@ then
             BUILD_BASE_PATH="dxvk"
             REPO_URL="https://github.com/doitsujin/dxvk"
             ;;
-        "d8vk")
-            BUILD_BASE_PATH="dxvk"
-            REPO_URL="https://github.com/AlpyneDreams/d8vk"
-            ;;
         "dxvk-ags")
             BUILD_BASE_PATH="dxvk-ags"
             REPO_URL="https://github.com/doitsujin/dxvk-ags"
