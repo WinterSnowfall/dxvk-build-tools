@@ -25,6 +25,10 @@ then
             BUILD_BASE_PATH="dxvk-tests"
             REPO_URL="https://github.com/doitsujin/dxvk-tests"
             ;;
+        "d8vk-tests")
+            BUILD_BASE_PATH="dxvk-tests"
+            REPO_URL="https://github.com/WinterSnowfall/d8vk-tests"
+            ;;
         "vkd3d-proton")
             BUILD_BASE_PATH="vkd3d-proton"
             REPO_URL="https://github.com/HansKristian-Work/vkd3d-proton"
@@ -51,6 +55,11 @@ then
         then
             echo -e "/package-release.sh\n/.gitignore" >> dxvk-tests/.gitignore
             cp ../misc/package-release_dxvk-tests.sh dxvk-tests/package-release.sh
+        elif [ "$REPO_NAME" == "d8vk-tests" ]
+        then
+            echo -e "/package-release.sh\n/meson.build.xp\n/.gitignore" >> d8vk-tests/.gitignore
+            cp ../misc/package-release_dxvk-tests.sh d8vk-tests/package-release.sh
+            cp ../misc/meson_d8vk-tests-xp.build d8vk-tests/meson.build.xp
         fi
     fi
 
