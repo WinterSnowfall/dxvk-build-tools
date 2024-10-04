@@ -3,6 +3,7 @@
 # build locally or trigger remote builds via ssh
 LOCAL_BUILD=true
 REMOTE_HOST="ssh://127.0.0.1"
+DOCKER_IMAGE_TAG=":latest"
 # relative paths that need to be absolute when building remotely
 SOURCE_PATH="$PWD/source"
 OUTPUT_PATH="$PWD/output"
@@ -31,7 +32,7 @@ then
                    -v "$SOURCE_PATH":/home/builder/source \
                    -v "$OUTPUT_PATH":/home/builder/output \
                    -v "$MISC_PATH":/home/builder/misc \
-                   dxvk-builder
+                   dxvk-builder"$DOCKER_IMAGE_TAG"
     else
         docker -H "$REMOTE_HOST" run -ti --rm \
                    --name dxvk-builder \
@@ -42,7 +43,7 @@ then
                    -v "$SOURCE_PATH":/home/builder/source \
                    -v "$OUTPUT_PATH":/home/builder/output \
                    -v "$MISC_PATH":/home/builder/misc \
-                   dxvk-builder
+                   dxvk-builder"$DOCKER_IMAGE_TAG"
     fi
 else
     echo "Please specify the repository name!"

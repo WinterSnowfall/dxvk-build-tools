@@ -7,6 +7,12 @@ if [ $# -gt 0 ]
 then
     REPO_NAME="$1"
     BUILD_NAME="$2"
+    BUILD_VARIANT="$3"
+
+    if [ "$BUILD_VARIANT" != "default" ]
+    then
+        BUILD_NAME="$2-$3"
+    fi
 
     case "$REPO_NAME" in
         "dxvk")
@@ -66,6 +72,13 @@ then
     if [ -d "$REPO_NAME" ]
     then
         cd "$REPO_NAME"
+
+        if [ "$REPO_NAME" == "d8vk-tests" -a "$BUILD_VARIANT" == "xp" ]
+        then
+            mv meson.build meson.build.bak
+            mv meson.build.xp meson.build
+        fi
+
         ./package-release.sh "$BUILD_NAME" /home/builder --no-package
 
         if [ $? -eq 0 ]
@@ -101,6 +114,12 @@ then
             mv "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME" "/home/builder/output/$REPO_NAME-$BUILD_NAME"
         else
             rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME"
+        fi
+
+        if [ "$REPO_NAME" == "d8vk-tests" -a "$BUILD_VARIANT" == "xp" ]
+        then
+            mv meson.build meson.build.xp
+            mv meson.build.bak meson.build
         fi
 
         cd ..

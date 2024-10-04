@@ -17,6 +17,7 @@ WORKDIR /home/builder/source
 
 ENV REPO_NAME="dxvk"
 ENV BUILD_NAME="devel"
+ENV BUILD_VARIANT="default"
     
-CMD ["bash", "-c", "/home/builder/source/repo_build.sh \"$REPO_NAME\" \"$BUILD_NAME\""]
+CMD ["bash", "-c", "/home/builder/source/repo_build.sh \"$REPO_NAME\" \"$BUILD_NAME\" \"$BUILD_VARIANT\""]
 
