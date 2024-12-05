@@ -19,6 +19,10 @@ then
             BUILD_BASE_PATH="dxvk"
             REPO_URL="https://github.com/doitsujin/dxvk"
             ;;
+        "dxvk-sarek")
+            BUILD_BASE_PATH="dxvk"
+            REPO_URL="https://github.com/pythonlover02/DXVK-Sarek"
+            ;;
         "dxvk-ags")
             BUILD_BASE_PATH="dxvk-ags"
             REPO_URL="https://github.com/doitsujin/dxvk-ags"
