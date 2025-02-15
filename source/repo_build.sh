@@ -92,6 +92,7 @@ then
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/x64/amd_ags_x64.dll.a"
             elif [ "$REPO_NAME" == "dxvk-nvapi" ]
             then
+                rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/layer"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/LICENSE"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/README.md"
             elif [ "$REPO_NAME" == "vkd3d-proton" ]
@@ -100,10 +101,11 @@ then
             elif [ "$REPO_NAME" == "nvidia-libs" ]
             then
                 rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/bin"
+                rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/layer"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/bottles_setup.sh"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/nvml_setup.sh"
-                rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/package-release.sh"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/proton_setup.sh"
+                rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/README.md"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/Readme_nvml.txt"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/setup_nvlibs.sh"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/version"
