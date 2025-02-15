@@ -128,7 +128,6 @@ then
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/x64/amd_ags_x64.dll.a"
             elif [ "$BUILD_BASE_PATH" == "dxvk-nvapi" ]
             then
-                rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/layer"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/LICENSE"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/README.md"
             elif [ "$BUILD_BASE_PATH" == "vkd3d-proton" ]
@@ -137,7 +136,6 @@ then
             elif [ "$BUILD_BASE_PATH" == "nvidia-libs" ]
             then
                 rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/bin"
-                rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/layer"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/bottles_setup.sh"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/nvml_setup.sh"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/proton_setup.sh"
