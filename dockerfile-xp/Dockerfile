@@ -6,6 +6,8 @@ RUN dpkg --add-architecture i386 \
     && apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     mingw-w64 \
+    pkgconf \
+    cmake \
     glslang-tools \
     wine \
     git \
@@ -24,7 +26,8 @@ WORKDIR /home/builder/source
 
 ENV REPO_NAME="dxvk-tests"
 ENV BUILD_NAME="devel"
+ENV BUILD_TYPE="regular"
 ENV BUILD_VARIANT="xp"
-    
-CMD ["bash", "-c", "/home/builder/source/repo_build.sh \"$REPO_NAME\" \"$BUILD_NAME\" \"$BUILD_VARIANT\""]
+
+CMD ["bash", "-c", "/home/builder/source/repo_build.sh \"$REPO_NAME\" \"$BUILD_NAME\" \"$BUILD_TYPE\" \"$BUILD_VARIANT\""]
 

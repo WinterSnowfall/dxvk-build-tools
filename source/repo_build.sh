@@ -7,51 +7,77 @@ if [ $# -gt 0 ]
 then
     REPO_NAME="$1"
     BUILD_NAME="$2"
-    BUILD_VARIANT="$3"
+    BUILD_TYPE="$3"
+    BUILD_VARIANT="$4"
 
-    if [ "$BUILD_VARIANT" != "default" ]
+    if [ "$BUILD_TYPE" == "native" ]
     then
-        BUILD_NAME="$2-$3"
-    fi
-
-    case "$REPO_NAME" in
-        "dxvk")
-            BUILD_BASE_PATH="dxvk"
-            REPO_URL="https://github.com/doitsujin/dxvk"
-            ;;
-        "dxvk-sarek")
-            BUILD_BASE_PATH="dxvk"
-            REPO_URL="https://github.com/pythonlover02/DXVK-Sarek"
-            ;;
-        "dxvk-ags")
-            BUILD_BASE_PATH="dxvk-ags"
-            REPO_URL="https://github.com/doitsujin/dxvk-ags"
-            ;;
-        "dxvk-nvapi")
-            BUILD_BASE_PATH="dxvk-nvapi"
-            REPO_URL="https://github.com/jp7677/dxvk-nvapi"
-            ;;
-        "dxvk-tests")
-            BUILD_BASE_PATH="dxvk-tests"
-            REPO_URL="https://github.com/doitsujin/dxvk-tests"
-            ;;
-        "d8vk-tests")
-            BUILD_BASE_PATH="dxvk-tests"
-            REPO_URL="https://github.com/WinterSnowfall/d8vk-tests"
-            ;;
-        "vkd3d-proton")
-            BUILD_BASE_PATH="vkd3d-proton"
-            REPO_URL="https://github.com/HansKristian-Work/vkd3d-proton"
-            ;;
-        "nvidia-libs")
-            BUILD_BASE_PATH="nvidia-libs"
-            REPO_URL="https://github.com/SveSop/nvidia-libs"
-            ;;
-        *)
-            echo "Invalid repository name selection."
+        if [ "$BUILD_VARIANT" != "default" -a "$BUILD_VARIANT" != "sniper" ]
+        then
+            echo "Native builds must use either default or sniper docker images."
             exit 1
-            ;;
-    esac
+        fi
+
+        case "$REPO_NAME" in
+            "dxvk")
+                if [ "$BUILD_VARIANT" == "sniper" ]
+                then
+                    BUILD_NAME="$4-$2"
+                fi
+
+                BUILD_BASE_PATH="dxvk-native"
+                REPO_URL="https://github.com/doitsujin/dxvk"
+                ;;
+            *)
+                echo "Invalid repository name selection."
+                exit 2
+                ;;
+        esac
+    else
+        if [ "$BUILD_VARIANT" != "default" ]
+        then
+            BUILD_NAME="$2-$4"
+        fi
+
+        case "$REPO_NAME" in
+            "dxvk")
+                BUILD_BASE_PATH="dxvk"
+                REPO_URL="https://github.com/doitsujin/dxvk"
+                ;;
+            "dxvk-sarek")
+                BUILD_BASE_PATH="dxvk"
+                REPO_URL="https://github.com/pythonlover02/DXVK-Sarek"
+                ;;
+            "dxvk-ags")
+                BUILD_BASE_PATH="dxvk-ags"
+                REPO_URL="https://github.com/doitsujin/dxvk-ags"
+                ;;
+            "dxvk-nvapi")
+                BUILD_BASE_PATH="dxvk-nvapi"
+                REPO_URL="https://github.com/jp7677/dxvk-nvapi"
+                ;;
+            "dxvk-tests")
+                BUILD_BASE_PATH="dxvk-tests"
+                REPO_URL="https://github.com/doitsujin/dxvk-tests"
+                ;;
+            "d8vk-tests")
+                BUILD_BASE_PATH="dxvk-tests"
+                REPO_URL="https://github.com/WinterSnowfall/d8vk-tests"
+                ;;
+            "vkd3d-proton")
+                BUILD_BASE_PATH="vkd3d-proton"
+                REPO_URL="https://github.com/HansKristian-Work/vkd3d-proton"
+                ;;
+            "nvidia-libs")
+                BUILD_BASE_PATH="nvidia-libs"
+                REPO_URL="https://github.com/SveSop/nvidia-libs"
+                ;;
+            *)
+                echo "Invalid repository name selection."
+                exit 3
+                ;;
+        esac
+    fi
 
     if $GIT_CLONE
     then
@@ -83,22 +109,32 @@ then
             mv meson.build.xp meson.build
         fi
 
-        ./package-release.sh "$BUILD_NAME" /home/builder --no-package
+        if [ "$BUILD_TYPE" == "native" ]
+        then
+            ./package-native.sh "$BUILD_NAME" /home/builder --no-package
+        else
+            ./package-release.sh "$BUILD_NAME" /home/builder --no-package
+        fi
 
         if [ $? -eq 0 ]
         then
-            if [ "$REPO_NAME" == "dxvk-ags" ]
+            if [ "$BUILD_BASE_PATH" == "dxvk-native" ]
+            then
+                rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/usr/include"
+                rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/usr/lib/pkgconfig"
+                rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/usr/lib32/pkgconfig"
+            elif [ "$BUILD_BASE_PATH" == "dxvk-ags" ]
             then
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/x64/amd_ags_x64.dll.a"
-            elif [ "$REPO_NAME" == "dxvk-nvapi" ]
+            elif [ "$BUILD_BASE_PATH" == "dxvk-nvapi" ]
             then
                 rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/layer"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/LICENSE"
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/README.md"
-            elif [ "$REPO_NAME" == "vkd3d-proton" ]
+            elif [ "$BUILD_BASE_PATH" == "vkd3d-proton" ]
             then
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/setup_vkd3d_proton.sh"
-            elif [ "$REPO_NAME" == "nvidia-libs" ]
+            elif [ "$BUILD_BASE_PATH" == "nvidia-libs" ]
             then
                 rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/bin"
                 rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/layer"
@@ -111,8 +147,14 @@ then
                 rm -f "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME/version"
             fi
 
-            rm -rf "/home/builder/output/$REPO_NAME-$BUILD_NAME"
-            mv "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME" "/home/builder/output/$REPO_NAME-$BUILD_NAME"
+            if [ "$BUILD_TYPE" == "native" ]
+            then
+                rm -rf "/home/builder/output/$BUILD_BASE_PATH-$BUILD_NAME" 
+                mv "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME" "/home/builder/output/$BUILD_BASE_PATH-$BUILD_NAME"
+            else
+                rm -rf "/home/builder/output/$REPO_NAME-$BUILD_NAME"
+                mv "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME" "/home/builder/output/$REPO_NAME-$BUILD_NAME"
+            fi
         else
             rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME"
         fi
@@ -128,10 +170,10 @@ then
         rm -rf "$REPO_NAME"
     else
         echo "Specified repository folder does not exist!"
-        exit 2
+        exit 5
     fi
 else
     echo "Please specify the repository name!"
-    exit 3
+    exit 4
 fi
 

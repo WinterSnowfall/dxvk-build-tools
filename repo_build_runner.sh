@@ -2,7 +2,10 @@
 
 # build locally or trigger remote builds via ssh
 LOCAL_BUILD=true
-REMOTE_HOST="ssh://127.0.0.1"
+REMOTE_HOST_IP="127.0.0.1"
+# use rsync to push sources to the remote host
+# and retrive binaries post-build
+USE_RSYNC=false
 DOCKER_IMAGE_TAG=":latest"
 # relative paths that need to be absolute when building remotely
 SOURCE_PATH="$PWD/source"
@@ -18,7 +21,21 @@ then
 
     if [ $# -ge 2 ]
     then
-        BUILD_NAME="$2"
+        if [ "$2" == "--native" -o "$3" == "--native" ]
+        then
+            BUILD_TYPE="native"
+
+            if [ "$2" == "--native" -a $# -ge 3 ]
+            then
+                BUILD_NAME="$3"
+            elif [ "$3" == "--native" ]
+            then
+                BUILD_NAME="$2"
+            fi
+        else
+            BUILD_TYPE="regular"
+            BUILD_NAME="$2"
+        fi
     fi
 
     if $LOCAL_BUILD
@@ -29,21 +46,47 @@ then
                    -e TZ="$TIMEZONE" \
                    -e REPO_NAME="$REPO_NAME" \
                    -e BUILD_NAME="$BUILD_NAME" \
+                   -e BUILD_TYPE="$BUILD_TYPE" \
                    -v "$SOURCE_PATH":/home/builder/source \
                    -v "$OUTPUT_PATH":/home/builder/output \
                    -v "$MISC_PATH":/home/builder/misc \
                    dxvk-builder"$DOCKER_IMAGE_TAG"
     else
-        docker -H "$REMOTE_HOST" run -ti --rm \
+        if $USE_RSYNC
+        then
+            echo "Syncing source path to remote host..."
+            rsync -av -P --checksum --mkpath --delete -e ssh "$SOURCE_PATH/$REPO_NAME/" "$REMOTE_HOST_IP:$SOURCE_PATH/$REPO_NAME/"
+            if [ $? -ne 0 ]
+            then
+                echo "Error encountered during source path syncing."
+                exit 2
+            fi
+            echo -e "Syncing complete.\n"
+        fi
+
+        docker -H "ssh://$REMOTE_HOST_IP" run -ti --rm \
                    --name dxvk-builder \
                    -h dxvk-builder \
                    -e TZ="$TIMEZONE" \
                    -e REPO_NAME="$REPO_NAME" \
                    -e BUILD_NAME="$BUILD_NAME" \
+                   -e BUILD_TYPE="$BUILD_TYPE" \
                    -v "$SOURCE_PATH":/home/builder/source \
                    -v "$OUTPUT_PATH":/home/builder/output \
                    -v "$MISC_PATH":/home/builder/misc \
                    dxvk-builder"$DOCKER_IMAGE_TAG"
+
+        if $USE_RSYNC
+        then
+            echo -e "\nRetrieving binaries from remote host..."
+            rsync -av -P --checksum --mkpath --delete -e ssh "$REMOTE_HOST_IP:$OUTPUT_PATH/$REPO_NAME-$BUILD_NAME/" "$OUTPUT_PATH/$REPO_NAME-$BUILD_NAME/"
+            if [ $? -ne 0 ]
+            then
+                echo "Error encountered during binary retrieval."
+                exit 2
+            fi
+            echo "Retrieval complete"
+        fi
     fi
 else
     echo "Please specify the repository name!"

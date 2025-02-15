@@ -32,5 +32,19 @@ And also git, in case that wasn't already painfully obvious.
 
 ## What about dxvk-native?
 
-That's not covered here, sorry. My aim is to provide an easy way to build Wine/Proton/Windows ready dlls for quick testing and development work. That being said it should be pretty easy to create a dxvk-native docker builder image retrofitting the existing scripts.
+To build the native version of dxvk, you can use:
+
+`./repo_build_runner.sh <repo_name> [<build_name>] --native`
+
+Where `<repo_name>` can only be dxvk. You can optionally also specify a `<build_name>`, otherwise it will default to `devel`.
+
+Note that by default the builder will use an Arch image for the build process. If you want a Steam Runtime SDK compatible "Sniper" build, please first download and build the image, using:
+
+`./docker_build-sniper.sh`
+
+And change the following line in the `repo_build_runner.sh` script:
+
+`DOCKER_IMAGE_TAG=":sniper"`
+
+Subsequent builds will use the Sniper image, and you will need to revert the value to `":latest"` if you wish to return to Arch based builds.
 
