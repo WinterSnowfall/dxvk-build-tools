@@ -2,11 +2,11 @@ FROM archlinux:latest
 
 RUN echo -e "\n\n[multilib]\nInclude = /etc/pacman.d/mirrorlist\n" >> /etc/pacman.conf \
     && pacman -Syu --noconfirm && pacman -S --noconfirm \
-    gcc \
-    mingw-w64-gcc \
+    mingw-w64-toolchain \
     meson \
     pkgconf \
     cmake \
+    make \
     glslang \
     wine \
     sdl2 \

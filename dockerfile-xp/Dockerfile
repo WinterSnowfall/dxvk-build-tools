@@ -4,10 +4,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN dpkg --add-architecture i386 \
     && apt-get update && apt-get install -y --no-install-recommends \
-    gcc \
     mingw-w64 \
     pkgconf \
     cmake \
+    make \
     glslang-tools \
     wine \
     git \
