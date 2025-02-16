@@ -86,36 +86,30 @@ then
     if $GIT_CLONE
     then
         git clone --depth 1 --recurse-submodules "$REPO_URL" "$REPO_NAME"
-
-
-        if [ "$REPO_NAME" == "dxvk-ags" ]
-        then
-            echo -e "package-release.sh\n.gitignore" >> "$REPO_NAME"/.gitignore
-            cp ../misc/package-release_dxvk-ags.sh "$REPO_NAME"/package-release.sh
-        elif [ "$REPO_NAME" == "dxvk-tests" ]
-        then
-            echo -e "package-release.sh\n.gitignore" >> "$REPO_NAME"/.gitignore
-            cp ../misc/package-release_dxvk-tests.sh "$REPO_NAME"/package-release.sh
-        elif [ "$REPO_NAME" == "d8vk-tests" ]
-        then
-            echo -e "package-release.sh\nmeson.build.xp\n.gitignore" >> "$REPO_NAME"/.gitignore
-            cp ../misc/package-release_dxvk-tests.sh "$REPO_NAME"/package-release.sh
-            cp ../misc/meson_d8vk-tests-xp.build "$REPO_NAME"/meson.build.xp
-        elif [ "$REPO_NAME" == "d3d8to9" ]
-        then
-            echo -e "package-release.sh\n.gitignore" >> "$REPO_NAME"/.gitignore
-            cp ../misc/package-release_d3d8to9.sh "$REPO_NAME"/package-release.sh
-        fi
     fi
 
     if [ -d "$REPO_NAME" ]
     then
         cd "$REPO_NAME"
 
-        if [ "$REPO_NAME" == "d8vk-tests" -a "$BUILD_VARIANT" == "xp" ]
+        if [ "$REPO_NAME" == "dxvk-ags" ]
         then
-            mv meson.build meson.build.bak
-            mv meson.build.xp meson.build
+            cp ../../misc/package-release_dxvk-ags.sh package-release.sh
+        elif [ "$REPO_NAME" == "dxvk-tests" ]
+        then
+            cp ../../misc/package-release_dxvk-tests.sh package-release.sh
+        elif [ "$REPO_NAME" == "d8vk-tests" ]
+        then
+            cp ../../misc/package-release_dxvk-tests.sh package-release.sh
+
+            if [ "$BUILD_VARIANT" == "xp" ]
+            then
+                mv meson.build meson.build.bak
+                cp ../../misc/meson_d8vk-tests-xp.build meson.build
+            fi
+        elif [ "$REPO_NAME" == "d3d8to9" ]
+        then
+            cp ../../misc/package-release_d3d8to9.sh package-release.sh
         fi
 
         if [ "$BUILD_TYPE" == "native" ]
@@ -166,10 +160,24 @@ then
             rm -rf "/home/builder/$BUILD_BASE_PATH-$BUILD_NAME"
         fi
 
-        if [ "$REPO_NAME" == "d8vk-tests" -a "$BUILD_VARIANT" == "xp" ]
+        if [ "$REPO_NAME" == "dxvk-ags" ]
         then
-            mv meson.build meson.build.xp
-            mv meson.build.bak meson.build
+            rm -f package-release.sh
+        elif [ "$REPO_NAME" == "dxvk-tests" ]
+        then
+            rm -f package-release.sh
+        elif [ "$REPO_NAME" == "d8vk-tests" ]
+        then
+            rm -f package-release.sh
+
+            if [ "$BUILD_VARIANT" == "xp" ]
+            then
+                rm -f meson.build
+                mv meson.build.bak meson.build
+            fi
+        elif [ "$REPO_NAME" == "d3d8to9" ]
+        then
+            rm -f package-release.sh
         fi
 
         cd ..
