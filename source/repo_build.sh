@@ -72,6 +72,10 @@ then
                 BUILD_BASE_PATH="vkd3d-proton"
                 REPO_URL="https://github.com/HansKristian-Work/vkd3d-proton"
                 ;;
+            "nvcuda")
+                BUILD_BASE_PATH="nvcuda"
+                REPO_URL="https://github.com/SveSop/nvcuda"
+                ;;
             "nvidia-libs")
                 BUILD_BASE_PATH="nvidia-libs"
                 REPO_URL="https://github.com/SveSop/nvidia-libs"

@@ -3,6 +3,7 @@ FROM archlinux:latest
 RUN echo -e "\n\n[multilib]\nInclude = /etc/pacman.d/mirrorlist\n" >> /etc/pacman.conf \
     && pacman -Syu --noconfirm && pacman -S --noconfirm \
     mingw-w64-toolchain \
+    gcc \
     meson \
     pkgconf \
     cmake \

@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN dpkg --add-architecture i386 \
     && apt-get update && apt-get install -y --no-install-recommends \
     mingw-w64 \
+    gcc \
     pkgconf \
     cmake \
     make \
