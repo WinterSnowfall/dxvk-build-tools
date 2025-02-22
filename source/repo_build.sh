@@ -80,6 +80,10 @@ then
                 BUILD_BASE_PATH="nvidia-libs"
                 REPO_URL="https://github.com/SveSop/nvidia-libs"
                 ;;
+            "apitrace")
+                BUILD_BASE_PATH="apitrace"
+                REPO_URL="https://github.com/apitrace/apitrace"
+                ;;
             *)
                 echo "Invalid repository name selection."
                 exit 3
@@ -114,6 +118,9 @@ then
         elif [ "$REPO_NAME" == "d3d8to9" ]
         then
             cp ../../misc/package-release_d3d8to9.sh package-release.sh
+        elif [ "$REPO_NAME" == "apitrace" ]
+        then
+            cp ../../misc/package-release_apitrace.sh package-release.sh
         fi
 
         if [ "$BUILD_TYPE" == "native" ]
@@ -180,6 +187,9 @@ then
                 mv meson.build.bak meson.build
             fi
         elif [ "$REPO_NAME" == "d3d8to9" ]
+        then
+            rm -f package-release.sh
+        elif [ "$REPO_NAME" == "apitrace" ]
         then
             rm -f package-release.sh
         fi

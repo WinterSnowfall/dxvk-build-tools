@@ -83,7 +83,7 @@ then
             if [ $? -ne 0 ]
             then
                 echo "Error encountered during binary retrieval."
-                exit 2
+                exit 3
             fi
             echo "Retrieval complete"
         fi
