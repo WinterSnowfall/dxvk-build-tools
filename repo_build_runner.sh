@@ -15,6 +15,24 @@ BUILD_NAME="devel"
 # update if you care about file timestamps
 TIMEZONE="Etc/UTC"
 
+if [ ! -d "$SOURCE_PATH" ]
+then
+    echo "Specified source path is invalid!"
+    exit 1
+fi
+
+if [ ! -d "$OUTPUT_PATH" ]
+then
+    echo "Specified output path is invalid!"
+    exit 2
+fi
+
+if [ ! -d "$MISC_PATH" ]
+then
+    echo "Specified misc path is invalid!"
+    exit 3
+fi
+
 if [ $# -ge 1 ]
 then
     REPO_NAME="$1"
@@ -59,7 +77,7 @@ then
             if [ $? -ne 0 ]
             then
                 echo "Error encountered during source path syncing."
-                exit 2
+                exit 5
             fi
             echo -e "Syncing complete.\n"
         fi
@@ -83,13 +101,13 @@ then
             if [ $? -ne 0 ]
             then
                 echo "Error encountered during binary retrieval."
-                exit 3
+                exit 6
             fi
             echo "Retrieval complete"
         fi
     fi
 else
     echo "Please specify the repository name!"
-    exit 1
+    exit 4
 fi
 

@@ -13,8 +13,12 @@ cmake -DCMAKE_SYSTEM_NAME=Windows \
 make clean
 make -j "$(nproc)"
 
-mkdir -p ../../apitrace-$1/x32
-find wrappers -name "*.dll" -exec mv {} ../../apitrace-$1/x32 \;
+mkdir -p ../../apitrace-$1/x32/bin
+mkdir -p ../../apitrace-$1/x32/wrappers
+mv apitrace.exe ../../apitrace-$1/x32/bin
+mv d3dretrace.exe ../../apitrace-$1/x32/bin
+mv glretrace.exe ../../apitrace-$1/x32/bin
+find wrappers -name "*.dll" -exec mv {} ../../apitrace-$1/x32/wrappers \;
 
 git clean -x -d -f -e package-release.sh
 
@@ -29,8 +33,12 @@ cmake -DCMAKE_SYSTEM_NAME=Windows \
 make clean
 make -j "$(nproc)"
 
-mkdir -p ../../apitrace-$1/x64
-find wrappers -name "*.dll" -exec mv {} ../../apitrace-$1/x64 \;
+mkdir -p ../../apitrace-$1/x64/bin
+mkdir -p ../../apitrace-$1/x64/wrappers
+mv apitrace.exe ../../apitrace-$1/x64/bin
+mv d3dretrace.exe ../../apitrace-$1/x64/bin
+mv glretrace.exe ../../apitrace-$1/x64/bin
+find wrappers -name "*.dll" -exec mv {} ../../apitrace-$1/x64/wrappers \;
 
 git clean -x -d -f -e package-release.sh
 
